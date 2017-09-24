@@ -28,60 +28,50 @@ def inputVerify():
         print('Please, input both an input and output filename.')
         exit(-1)
 
-def propose(man, woman):
-    if woman.prefs.index(woman.currPartner) > woman.prefs.index(man):
-        return False
-    else:
-        return True
 
 def WilleHinzley(j_father):
-    bachelors = deque()# men are a
-    bachelorettes = [] # women are b
+    men = deque()  # men are a
+    women = {}  # women are b
     results = []
     for pairing in j_father:
-        for man in pairing[0]:
-            #print(man)
-            bachelors.append(person(man, pairing[0][man]))
-        for woman in pairing[1]:
-            #print(woman)
-            bachelorettes.append(person(woman, pairing[1][woman]))
-
+        for guy in pairing[0]:
+            #print(guy)
+            men.append(person(guy, pairing[0][guy]))
+        for girl in pairing[1]:
+            #print(girl)
+            women[girl] = (person(girl, pairing[1][girl]))
         while True:
             try:
-                luckyGuy = bachelors.popleft()
-                index = 0
-                for i in range(len(bachelorettes)):
-                    if bachelorettes[i].isPaired() == False: # if available
-                        bachelorettes[i].pair(luckyGuy)
+                luckyGuy = men.popleft()
+                for _ in luckyGuy.getPrefList():
+                    Hottie = women[luckyGuy.getPrefList().pop(0)]
+                    if Hottie.isPaired() == False:
+                        Hottie.pair(luckyGuy)
                         break
-                    else: # if paired
-                        newPartner = bachelorettes[i].getPrefList().index(luckyGuy.getName())
-                        currPartner = bachelorettes[i].getPrefList().index(bachelorettes[i].getPartner().getName())
-                        if newPartner < currPartner: # if new is higher up list than curr
-                            unluckyGuy = bachelorettes[i].swap(luckyGuy)
-                            bachelors.append(unluckyGuy)
+                    else:
+                        luckyGuyIndex = Hottie.getPrefList().index(luckyGuy.getName())
+                        currGuyIndex = Hottie.getPrefList().index(Hottie.getPartner().getName())
+                        if luckyGuyIndex < currGuyIndex:
+                            unluckyGuy = Hottie.getPartner()
+                            men.append(unluckyGuy)
+                            Hottie.swap(luckyGuy)
+                            break
+
             except(IndexError):
                 break
-        tempDict = defaultdict(str)
-        for i in range(len(bachelorettes)):
-            print(bachelorettes[i])
-        for i in range(len(bachelorettes)):
-            tempDict[bachelorettes[i].getPartner().getName()] =  bachelorettes[i].getName()
+
+        tempDict = defaultdict()
+        for girl in women:
+            print(girl)
+            tempDict[women[girl].getPartner().getName()] = girl
         results.append(tempDict)
-        bachelors.clear()
-        bachelorettes.clear()
+        men.clear()
+        women.clear()
 
     # for _ in range(len(bachelors)):
     #     print(bachelors.popleft())
     #
     print(results)
-    for i in range(len(results)):
-        print(results[i])
-
-
-
-
-
 
     return results
 
