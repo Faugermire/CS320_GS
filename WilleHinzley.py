@@ -25,7 +25,7 @@ def inputVerify():
         files.append(sys.argv[2])
         return files
     else:
-        print('Please, input both an input and output filename.')
+        print('Please supply both an input and output filename.')
         exit(-1)
 
 
