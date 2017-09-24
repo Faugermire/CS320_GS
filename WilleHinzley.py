@@ -54,7 +54,7 @@ def WilleHinzley(j_father):
                         if luckyGuyIndex < currGuyIndex:
                             unluckyGuy = Hottie.swap(luckyGuy)
                             men.append(unluckyGuy)
-                            break
+                            break # 9 HOURS AND YOU ELUDED ME WHHHYYYYYYYYYYYY
             except(IndexError):  # if all of the men have found a partner.
                 break
 
