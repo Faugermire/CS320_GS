@@ -37,7 +37,7 @@ def propose(man, woman):
 def WilleHinzley(j_father):
     bachelors = deque()# men are a
     bachelorettes = [] # women are b
-    result = []
+    results = []
     for pairing in j_father:
         for man in pairing[0]:
             #print(man)
@@ -57,26 +57,33 @@ def WilleHinzley(j_father):
                     else: # if paired
                         newPartner = bachelorettes[i].getPrefList().index(luckyGuy.getName())
                         currPartner = bachelorettes[i].getPrefList().index(bachelorettes[i].getPartner().getName())
-                        if newPartner < currPartner:
+                        if newPartner < currPartner: # if new is higher up list than curr
                             unluckyGuy = bachelorettes[i].swap(luckyGuy)
                             bachelors.append(unluckyGuy)
             except(IndexError):
                 break
+        tempDict = defaultdict(str)
         for i in range(len(bachelorettes)):
             print(bachelorettes[i])
+        for i in range(len(bachelorettes)):
+            tempDict[bachelorettes[i].getPartner().getName()] =  bachelorettes[i].getName()
+        results.append(tempDict)
         bachelors.clear()
         bachelorettes.clear()
 
     # for _ in range(len(bachelors)):
     #     print(bachelors.popleft())
     #
+    print(results)
+    for i in range(len(results)):
+        print(results[i])
 
 
 
 
 
 
-    return result
+    return results
 
 
 if __name__ == '__main__':
