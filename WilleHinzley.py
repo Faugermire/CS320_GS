@@ -35,10 +35,10 @@ def WilleHinzley(j_father):
     results = []
     for pairing in j_father:
         for guy in pairing[0]:
-            #print(guy)
+            # print(guy)
             men.append(person(guy, pairing[0][guy]))
         for girl in pairing[1]:
-            #print(girl)
+            # print(girl)
             women[girl] = (person(girl, pairing[1][girl]))
         while True:
             try:
@@ -52,27 +52,18 @@ def WilleHinzley(j_father):
                         luckyGuyIndex = Hottie.getPrefList().index(luckyGuy.getName())
                         currGuyIndex = Hottie.getPrefList().index(Hottie.getPartner().getName())
                         if luckyGuyIndex < currGuyIndex:
-                            unluckyGuy = Hottie.getPartner()
+                            unluckyGuy = Hottie.swap(luckyGuy)
                             men.append(unluckyGuy)
-                            Hottie.swap(luckyGuy)
                             break
-
-            except(IndexError):
+            except(IndexError):  # if all of the men have found a partner.
                 break
 
         tempDict = defaultdict()
         for girl in women:
-            print(girl)
             tempDict[women[girl].getPartner().getName()] = girl
         results.append(tempDict)
         men.clear()
         women.clear()
-
-    # for _ in range(len(bachelors)):
-    #     print(bachelors.popleft())
-    #
-    print(results)
-
     return results
 
 

@@ -21,7 +21,10 @@ class person:
         return self.paired
 
     def swap(self, newPartner):
+        oldPartner = self.partner
         self.partner = newPartner
+        return oldPartner
+
 
     def __str__(self):
         return self.name + ": " + " ".join(str(x) for x in self.prefList)
