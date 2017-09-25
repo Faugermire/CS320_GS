@@ -6,6 +6,7 @@ import json
 import time
 from collections import defaultdict, deque
 from person import person
+import generate_problems
 
 
 def write_json(obj, filename):
@@ -69,6 +70,7 @@ def WilleHinzley(j_father):
 
 if __name__ == '__main__':
     # read in command line input
+    generate_problems.create_big_problems()
     files = inputVerify()
     # read in input file
     j_father = read_json(files[0])
