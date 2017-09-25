@@ -70,7 +70,6 @@ def WilleHinzley(j_father):
 
 if __name__ == '__main__':
     # read in command line input
-    generate_problems.create_big_problems()
     files = inputVerify()
     # read in input file
     j_father = read_json(files[0])
